@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>KamandConnect — Conversations start here</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body class="landing">
+  <div class="noise"></div><div class="orb orb-a"></div><div class="orb orb-b"></div>
+  <nav class="topnav"><a class="brand" href="/"><span class="brand-mark">K</span> Kamand<span>Connect</span></a><div><a class="nav-link" href="/login">Log in</a><a class="nav-cta" href="/signup">Get started <span>↗</span></a></div></nav>
+  <main class="hero">
+    <div class="eyebrow reveal"><span class="pulse"></span> BUILT FOR BETTER CONVERSATIONS</div>
+    <h1 class="reveal delay-1">Your people.<br><span>Your space.</span></h1>
+    <p class="hero-copy reveal delay-2">One-to-one conversations, groups that click, and broadcasts that keep everyone in the loop. All in one place.</p>
+    <div class="hero-actions reveal delay-3"><a class="primary-btn" href="/signup">Start a conversation <span>→</span></a><a class="secondary-btn" href="/login">I already have an account</a></div>
+    <div class="hero-foot reveal delay-3"><span>✦ PRIVATE CHATS</span><span>✦ GROUP SPACES</span><span>✦ CAMPUS BROADCASTS</span></div>
+  </main>
+  <div class="floating-chat chat-one"><div class="mini-avatar av-violet">A</div><div><b>Arjun Mehta</b><p>That idea is actually brilliant ✨</p></div><span class="mini-time">now</span></div>
+  <div class="floating-chat chat-two"><div class="mini-avatar av-green">D</div><div><b>Design Club <span class="tiny-badge">GROUP</span></b><p>Priya shared a new update</p></div><span class="mini-dot"></span></div>
+  <div class="scroll-cue"><span></span> GOOD CONVERSATIONS START HERE</div>
+  <script>document.querySelectorAll('.reveal').forEach((el)=>el.classList.add('visible'));</script>
+</body></html>

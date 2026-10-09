@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Chats · KamandConnect</title><link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"><script src="https://cdn.socket.io/4.7.5/socket.io.min.js"></script></head>
+<body class="app-page">
+<aside class="sidebar"><a class="brand" href="/"><span class="brand-mark">K</span><span class="brand-name">Kamand<span>Connect</span></span></a>
+<div class="side-label">WORKSPACE</div><div class="side-current"><span class="workspace-icon">✦</span><span>My conversations</span><span class="green-status"></span></div>
+<div class="side-label side-label-row">MESSAGES <button id="new-dm-toggle" class="icon-button" title="Find people">＋</button></div>
+<div class="conversation-list">
+{% for c in conversations %}
+<button class="conversation-link {% if loop.first %}selected{% endif %}" data-id="{{ c.id }}" data-title="{{ c.title }}" data-kind="{{ c.kind }}"><span class="conv-icon {{ c.kind }}">{{ '◉' if c.kind == 'channel' else ('#' if c.kind == 'group' else '↗') }}</span><span class="conv-title">{{ c.title }}</span><span class="conv-arrow">›</span></button>
+{% endfor %}
+</div>
+<div id="people-panel" class="people-panel hidden"><div class="side-label">START A PRIVATE CHAT</div>{% for u in users %}<form method="post" action="/dm/{{ u.id }}"><button class="person-option" type="submit"><span class="mini-avatar av-violet">{{ u.name[:1]|upper }}</span><span><b>{{ u.name }}</b><small>@{{ u.username }}</small></span></button></form>{% endfor %}</div>
+<div class="sidebar-bottom"><div class="profile-avatar">{{ current_user.name[:1]|upper }}</div><div class="profile-meta"><b>{{ current_user.name }}</b><small>@{{ current_user.username }}</small></div><a class="logout" href="/logout" title="Log out">↗</a></div></aside>
+<main class="chat-main"><header class="chat-header"><div><div class="eyebrow small-eyebrow">YOUR SPACE</div><h2 id="active-title">Choose a conversation</h2></div><div class="header-right"><span class="secure-pill"><span class="green-status"></span> Connected</span><button class="icon-button" id="new-space-toggle" title="Create a group or channel">＋</button></div></header>
+<div id="create-space" class="create-space hidden"><form method="post" action="/conversations"><input name="title" placeholder="Name your group or channel" maxlength="100" required><select name="kind"><option value="group">Group</option><option value="channel">Broadcast channel</option></select><button class="small-primary" type="submit">Create</button></form></div>
+<section class="empty-state" id="empty-state"><div class="empty-orbit"><span>✦</span></div><h1>Make room for a<br><span>good conversation.</span></h1><p>Select a chat on the left, find someone new, or create a group space.</p><div class="empty-actions"><button class="primary-btn" id="find-people">Find people <span>→</span></button><button class="secondary-btn" id="create-group">Create a group</button></div></section>
+<section id="message-area" class="message-area hidden"><div class="conversation-intro"><span class="intro-line"></span><span id="intro-text">Conversation started</span><span class="intro-line"></span></div><div id="messages" class="messages"></div><div id="typing-indicator" class="typing-indicator"></div></section>
+<form id="message-form" class="composer hidden"><button type="button" class="composer-plus" title="More features (coming soon)">＋</button><input id="message-input" maxlength="4000" placeholder="Write a message..." autocomplete="off"><button class="send-button" type="submit" aria-label="Send message">↑</button><div class="composer-hint">Enter to send · Be kind to each other</div></form>
+</main><script>window.KAMAND_USER={{ current_user|tojson }};</script><script src="{{ url_for('static', filename='app.js') }}"></script></body></html>
